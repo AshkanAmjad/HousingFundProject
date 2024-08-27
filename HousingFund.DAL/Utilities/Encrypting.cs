@@ -8,7 +8,7 @@ namespace HousingFund.DAL.Utilities
 {
     internal static class Encrypting
     {
-        private static string _key = "adef@@kfxcbv@";
+        private static string _key = "f@@kf@hbhjshbkihqw%$k454!!-Z";
 
         internal static string ConvertToEncrypt(string password)
         {
@@ -19,7 +19,7 @@ namespace HousingFund.DAL.Utilities
             return Convert.ToBase64String(passwordBytes);
         }
 
-        internal static string CovertToDecrypt(string base64EncodeData)
+        internal static string ConvertToDecrypt(string base64EncodeData)
         {
             var base64EncodeBytes = Convert.FromBase64String(base64EncodeData);
 

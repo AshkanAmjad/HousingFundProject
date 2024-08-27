@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HousingFund.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateInitDB : Migration
+    public partial class CreateDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,8 +16,8 @@ namespace HousingFund.DAL.Migrations
                 columns: table => new
                 {
                     FundId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Income = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Winner = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Income = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -30,7 +30,7 @@ namespace HousingFund.DAL.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    userId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NationalCode = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
@@ -44,7 +44,7 @@ namespace HousingFund.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.userId);
+                    table.PrimaryKey("PK_Users", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
@@ -53,7 +53,8 @@ namespace HousingFund.DAL.Migrations
                 {
                     UserFundId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    FundId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    FundId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsWinner = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -67,13 +68,13 @@ namespace HousingFund.DAL.Migrations
                         name: "FK_UserFund_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "userId");
+                        principalColumn: "UserId");
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "userId", "Address", "FirstName", "IsActive", "IsAdmin", "LastName", "NationalCode", "Password", "PhoneNumber", "RegisterDate", "UserName" },
-                values: new object[] { new Guid("3cc633ba-05dd-47f7-85fc-480ae495e8c5"), "کرج، فردیس، کانال غربی", "اشکان", true, true, "مطهری", "0021047022", "MTIzYWRlZkBAa2Z4Y2J2QA==", "09351225600", new DateTime(2024, 8, 20, 5, 7, 47, 619, DateTimeKind.Local).AddTicks(98), "AshkanAmjad" });
+                columns: new[] { "UserId", "Address", "FirstName", "IsActive", "IsAdmin", "LastName", "NationalCode", "Password", "PhoneNumber", "RegisterDate", "UserName" },
+                values: new object[] { new Guid("430e6f7b-a551-41f4-ac6e-11cfbf705bec"), "کرج، فردیس، کانال غربی", "اشکان", true, true, "مطهری", "0021047022", "MTIzZkBAa2ZAaGJoanNoYmtpaHF3JSRrNDU0ISEtWg==", "09351225600", new DateTime(2024, 8, 27, 23, 53, 40, 176, DateTimeKind.Local).AddTicks(3570), "AshkanAmjad" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserFund_FundId",

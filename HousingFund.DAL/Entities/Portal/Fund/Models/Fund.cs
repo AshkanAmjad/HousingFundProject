@@ -21,9 +21,6 @@ namespace HousingFund.DAL.Entities.Portal.Fund.Models
         public string Income { get; set; }
 
         [Required]
-        public Guid Winner { get; set; }
-
-        [Required]
         public bool IsActive { get; set; }
 
         [Required]

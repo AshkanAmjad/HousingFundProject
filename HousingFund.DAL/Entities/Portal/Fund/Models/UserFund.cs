@@ -17,6 +17,8 @@ namespace HousingFund.DAL.Entities.Portal.Fund.Models
         public Guid? UserId { get; set; }
 
         public Guid? FundId { get; set; }
+
+        public bool IsWinner {  get; set; }
         #endregion
 
         #region Realations

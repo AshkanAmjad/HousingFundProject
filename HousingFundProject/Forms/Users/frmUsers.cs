@@ -90,7 +90,10 @@ namespace HousingFundProject.Forms.Users
 
             if (dgvUsers.CurrentRow != null)
             {
-                if (RtlMessageBox.Show("آیا از حذف این کاربر مطمئن هستید؟", "هشدار", MessageBoxButtons.YesNo) == DialogResult.Yes)
+
+                DialogResult boxResult = frmCustomMessageBox.Show("آیا از حذف این کاربر مطمئن هستید؟");
+
+                if (boxResult == DialogResult.Yes)
                 {
                     try
                     {

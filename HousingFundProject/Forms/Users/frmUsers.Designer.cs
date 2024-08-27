@@ -102,7 +102,7 @@
             btnToolStripDeleteUser.ImageTransparentColor = Color.Magenta;
             btnToolStripDeleteUser.Name = "btnToolStripDeleteUser";
             btnToolStripDeleteUser.Size = new Size(52, 52);
-            btnToolStripDeleteUser.Text = "toolStripButton1";
+            btnToolStripDeleteUser.TextImageRelation = TextImageRelation.TextBeforeImage;
             btnToolStripDeleteUser.Click += btnToolStripDeleteUser_Click;
             // 
             // lblSearch

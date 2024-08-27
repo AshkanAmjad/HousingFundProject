@@ -82,7 +82,7 @@ namespace HousingFundProject.Forms.Lottary
 
                         RegisterFundVM fund = new()
                         {
-                            Title = txtIncome.Text,
+                            Title = txtTitle.Text,
                             Income = txtIncome.Text,
                             IsActive = true,
                             CreatedDate = DateTime.Now,

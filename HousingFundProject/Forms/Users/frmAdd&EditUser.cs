@@ -140,7 +140,7 @@ namespace HousingFundProject.Forms.Users
             }
 
 
-            if (Id == Guid.Empty && txtConfirmPassword.Text == "")
+            if (Id == Guid.Empty && txtConfirmPassword.Text == "" )
             {
                 lblRequiredConfirmPassword.Visible = true;
                 result = false;

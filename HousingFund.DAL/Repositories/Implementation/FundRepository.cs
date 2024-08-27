@@ -5,6 +5,8 @@ using HousingFund.DAL.Mapping;
 using HousingFund.DAL.Repositories.Interface;
 using HousingFund.DAL.Utilities;
 using HousingFund.DAL.ViewModels.Portal.Fund;
+using HousingFund.DAL.ViewModels.Security.User;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,60 +37,12 @@ namespace HousingFund.DAL.Repositories.Implementation
                            .AsQueryable();
         }
 
-        public List<DisplayFundsVM> GetFunds()
-        {
-
-            var funds = _context.Users.Join(_context.Funds,
-                                            u => u.UserId,
-                                            f => f.Winner,
-                                            (u, f) => new DisplayFundsVM
-                                            {
-                                                FundId = f.FundId.ToString(),
-                                                Income = f.Income,
-                                                FirstName = u.FirstName,
-                                                LastName = u.LastName,
-                                                IsActive = (f.IsActive ? "فعال" : "غیر فعال"),
-                                                CreatedDate = $"{f.CreatedDate.ToShamsi()}"
-                                            })
-                                     .ToList();
-            return funds;
-        }
-
-        public List<DisplayFundsVM> Search(string search)
-        {
-            using (HousingFundContext db = new())
-            {
-                var funds = _context.Users.Join(_context.Funds,
-                                                u => u.UserId,
-                                                f => f.Winner,
-                                                (u, f) => new DisplayFundsVM
-                                                {
-                                                    FundId = f.FundId.ToString(),
-                                                    Income = f.Income,
-                                                    Title = f.Title,
-                                                    FirstName = u.FirstName,
-                                                    LastName = u.LastName,
-                                                    IsActive = (f.IsActive ? "فعال" : "غیر فعال"),
-                                                    CreatedDate = $"{f.CreatedDate.ToShamsi()}"
-                                                })
-                                          .Where(f => f.Title.Contains(search) ||
-                                                      f.Income.Contains(search) ||
-                                                      f.FirstName.Contains(search) ||
-                                                      f.LastName.Contains(search)
-                                                 )
-                                          .ToList();
-                return funds;
-            }
-        }
-
-
         public bool Add(RegisterFundVM model, out string message)
         {
             string checkMessage = "";
 
             Fund fund = _mapper.Map<Fund>(model);
             fund.FundId = Guid.NewGuid();
-            fund.Winner = Guid.Empty;
 
             _context.Funds.Add(fund);
 
@@ -170,5 +124,40 @@ namespace HousingFund.DAL.Repositories.Implementation
             return false;
         }
 
+        public List<DisplayFundsVM> GetFunds()
+        {
+            var context = GetFundsQuery();
+            var funds = context.OrderByDescending(f => f.CreatedDate)
+                               .Select(f => new DisplayFundsVM
+                               {
+                                   FundId = f.FundId.ToString(),
+                                   Title = f.Title,
+                                   Income = f.Income,
+                                   IsActive = (f.IsActive ? "فعال" : "غیر فعال"),
+                                   CreatedDate = f.CreatedDate.ToShamsi()
+                               }).ToList();
+
+            return funds;
+        }
+
+        public List<DisplayFundsVM> Search(string search)
+        {
+            using(HousingFundContext db = new())
+            {
+                var context = GetFundsQuery();
+                var funds = context.Where(u => u.Title.Contains(search) ||
+                                               u.Income.Contains(search) 
+                                          )
+                                   .Select(f => new DisplayFundsVM
+                                   {
+                                       FundId = f.FundId.ToString(),
+                                       Title = f.Title,
+                                       Income = f.Income,
+                                       IsActive = (f.IsActive ? "فعال" : "غیر فعال"),
+                                       CreatedDate = f.CreatedDate.ToShamsi()
+                                   }).ToList();
+                return funds;
+            }
+        }
     }
 }

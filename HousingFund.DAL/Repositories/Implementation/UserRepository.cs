@@ -49,7 +49,7 @@ namespace HousingFund.DAL.Repositories.Implementation
                 {
                     string userPass = user.Password.ToString();
 
-                    string decryptPass = Encrypting.CovertToDecrypt(userPass);
+                    string decryptPass = Encrypting.ConvertToDecrypt(userPass);
 
                     if (model.Password == decryptPass)
                     {
@@ -85,7 +85,7 @@ namespace HousingFund.DAL.Repositories.Implementation
                                    IsAdmin = (u.IsAdmin ? "فعال" : "غیر فعال"),
                                    NationalCode = u.NationalCode,
                                    PhoneNumber = u.PhoneNumber,
-                                   RegisterDate = $"{u.RegisterDate.ToShamsi()}",
+                                   RegisterDate = u.RegisterDate.ToShamsi(),
                                }).ToList();
             return users;
         }

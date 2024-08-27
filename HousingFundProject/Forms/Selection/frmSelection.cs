@@ -51,7 +51,7 @@ namespace HousingFundProject.Forms.Selection
         {
             this.Close();
 
-            frmLottary lottary = new();
+            frmFund lottary = new();
             lottary.Show();
         }
     }

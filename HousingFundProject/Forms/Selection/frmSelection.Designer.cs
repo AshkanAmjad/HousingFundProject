@@ -106,7 +106,7 @@
             btnLottary.RightToLeft = RightToLeft.No;
             btnLottary.Size = new Size(466, 111);
             btnLottary.TabIndex = 8;
-            btnLottary.Text = "قرعه کشی";
+            btnLottary.Text = "وام ها";
             btnLottary.UseVisualStyleBackColor = false;
             btnLottary.Click += btnLottary_Click;
             // 
@@ -126,9 +126,9 @@
             // 
             statusStrip1.ImageScalingSize = new Size(20, 20);
             statusStrip1.Items.AddRange(new ToolStripItem[] { lblDate, lblTime });
-            statusStrip1.Location = new Point(0, 771);
+            statusStrip1.Location = new Point(0, 724);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(800, 29);
+            statusStrip1.Size = new Size(782, 29);
             statusStrip1.TabIndex = 0;
             // 
             // lblDate

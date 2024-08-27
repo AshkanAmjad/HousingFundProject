@@ -1,6 +1,7 @@
 ﻿using HousingFund.DAL.Context;
 using HousingFund.DAL.Repositories.Implementation;
 using HousingFund.DAL.Repositories.Interface;
+using HousingFundProject.Forms.Fund;
 using HousingFundProject.Forms.Messages;
 using HousingFundProject.Forms.Selection;
 using HousingFundProject.Forms.Users;
@@ -17,11 +18,11 @@ using System.Windows.Forms;
 
 namespace HousingFundProject.Forms.Lottary
 {
-    public partial class frmLottary : Form
+    public partial class frmFund : Form
     {
         IFundRepository _fundRepository = new FundRepository();
 
-        public frmLottary()
+        public frmFund()
         {
             InitializeComponent();
         }
@@ -60,7 +61,9 @@ namespace HousingFundProject.Forms.Lottary
 
             if (dgvFunds.CurrentRow != null)
             {
-                if (RtlMessageBox.Show("آیا از حذف این کاربر مطمئن هستید؟", "هشدار", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                DialogResult boxResult = frmCustomMessageBox.Show("آیا از حذف این قرعه مطمئن هستید؟");
+
+                if (boxResult == DialogResult.Yes)
                 {
                     try
                     {
@@ -137,6 +140,33 @@ namespace HousingFundProject.Forms.Lottary
                 add_edit.ShowDialog();
 
                 BindGrid();
+
+            }
+        }
+
+        private void btnToolStripAddUser_Click(object sender, EventArgs e)
+        {
+            if(dgvFunds.CurrentRow != null)
+            {
+                string id = dgvFunds.CurrentRow.Cells[0].Value.ToString();
+                Guid fundId = new Guid(id);
+
+                this.Close();
+
+                frmAddUserFund add = new();
+                add.Id = fundId;
+                add.Show();
+            }
+        }
+
+        private void btnToolStriplottery_Click(object sender, EventArgs e)
+        {
+            if (dgvFunds.CurrentRow != null)
+            {
+                string id = dgvFunds.CurrentRow.Cells[0].Value.ToString();
+                Guid fundId = new Guid(id);
+
+                
 
             }
         }

@@ -41,9 +41,6 @@ namespace HousingFund.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("Winner")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("FundId");
 
                     b.ToTable("Funds");
@@ -56,6 +53,9 @@ namespace HousingFund.DAL.Migrations
 
                     b.Property<Guid?>("FundId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsWinner")
+                        .HasColumnType("bit");
 
                     b.Property<Guid?>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -71,7 +71,7 @@ namespace HousingFund.DAL.Migrations
 
             modelBuilder.Entity("HousingFund.DAL.Entities.Security.User.Models.User", b =>
                 {
-                    b.Property<Guid>("userId")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Address")
@@ -116,23 +116,23 @@ namespace HousingFund.DAL.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
-                    b.HasKey("userId");
+                    b.HasKey("UserId");
 
                     b.ToTable("Users");
 
                     b.HasData(
                         new
                         {
-                            userId = new Guid("756c6c9d-63ec-4ea8-ad6a-d4320d8978f6"),
+                            UserId = new Guid("430e6f7b-a551-41f4-ac6e-11cfbf705bec"),
                             Address = "کرج، فردیس، کانال غربی",
                             FirstName = "اشکان",
                             IsActive = true,
                             IsAdmin = true,
                             LastName = "مطهری",
                             NationalCode = "0021047022",
-                            Password = "MTIzYWRlZkBAa2Z4Y2J2QA==",
+                            Password = "MTIzZkBAa2ZAaGJoanNoYmtpaHF3JSRrNDU0ISEtWg==",
                             PhoneNumber = "09351225600",
-                            RegisterDate = new DateTime(2024, 8, 26, 21, 38, 43, 852, DateTimeKind.Local).AddTicks(6114),
+                            RegisterDate = new DateTime(2024, 8, 27, 23, 53, 40, 176, DateTimeKind.Local).AddTicks(3570),
                             UserName = "AshkanAmjad"
                         });
                 });

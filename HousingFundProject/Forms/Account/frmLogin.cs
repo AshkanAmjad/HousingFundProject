@@ -1,20 +1,9 @@
-﻿using Azure.Messaging;
-using HousingFund.DAL.Repositories.Implementation;
+﻿using HousingFund.DAL.Repositories.Implementation;
 using HousingFund.DAL.Repositories.Interface;
 using HousingFund.DAL.ViewModels.Security.Login;
 using HousingFundProject.Forms.Messages;
 using HousingFundProject.Forms.Selection;
 using HousingFundProject.Utilities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace HousingFundProject.Account
 {

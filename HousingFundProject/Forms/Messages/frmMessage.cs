@@ -12,14 +12,14 @@ namespace HousingFundProject.Forms.Messages
 {
     public partial class frmMessage : Form
     {
-        public frmMessage(string Message)
+        public frmMessage(string message)
         {
             InitializeComponent();
             pnlMessage.Dock = DockStyle.None;
             lblMessage.AutoSize = false;
             lblMessage.Width = default;
             lblMessage.Dock=DockStyle.Fill;
-            lblMessage.Text = Message;
+            lblMessage.Text = message;
         }
 
         private void timer1_Tick(object sender, EventArgs e)

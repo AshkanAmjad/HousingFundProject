@@ -1,6 +1,6 @@
 ﻿namespace HousingFundProject.Forms.Lottary
 {
-    partial class frmLottary
+    partial class frmFund
     {
         /// <summary>
         /// Required designer variable.
@@ -29,14 +29,16 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLottary));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmFund));
             toolStrip1 = new ToolStrip();
             btnToolStripBack = new ToolStripButton();
             btnToolStripAddFund = new ToolStripButton();
-            btnToolStripEditUser = new ToolStripButton();
+            btnToolStripEditFund = new ToolStripButton();
             btnToolStripDeleteFund = new ToolStripButton();
             lblSearch = new ToolStripLabel();
             txtSearch = new ToolStripTextBox();
+            btnToolStriplottery = new ToolStripButton();
+            btnToolStripAddUser = new ToolStripButton();
             statusStrip1 = new StatusStrip();
             lblDate = new ToolStripStatusLabel();
             lblTime = new ToolStripStatusLabel();
@@ -44,8 +46,6 @@
             dgvFunds = new DataGridView();
             FundId = new DataGridViewTextBoxColumn();
             Title = new DataGridViewTextBoxColumn();
-            FirstName = new DataGridViewTextBoxColumn();
-            LastName = new DataGridViewTextBoxColumn();
             Income = new DataGridViewTextBoxColumn();
             IsActive = new DataGridViewTextBoxColumn();
             CreatedDate = new DataGridViewTextBoxColumn();
@@ -57,7 +57,7 @@
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new Size(48, 48);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { btnToolStripBack, btnToolStripAddFund, btnToolStripEditUser, btnToolStripDeleteFund, lblSearch, txtSearch });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { btnToolStripBack, btnToolStripAddFund, btnToolStripEditFund, btnToolStripDeleteFund, lblSearch, txtSearch, btnToolStriplottery, btnToolStripAddUser });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(1170, 55);
@@ -83,14 +83,14 @@
             btnToolStripAddFund.Size = new Size(52, 52);
             btnToolStripAddFund.Click += btnToolStripAddFund_Click;
             // 
-            // btnToolStripEditUser
+            // btnToolStripEditFund
             // 
-            btnToolStripEditUser.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            btnToolStripEditUser.Image = Properties.Resources.edit_user_icon;
-            btnToolStripEditUser.ImageTransparentColor = Color.Magenta;
-            btnToolStripEditUser.Name = "btnToolStripEditUser";
-            btnToolStripEditUser.Size = new Size(52, 52);
-            btnToolStripEditUser.Click += btnToolStripEditUser_Click;
+            btnToolStripEditFund.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            btnToolStripEditFund.Image = Properties.Resources.edit_user_icon;
+            btnToolStripEditFund.ImageTransparentColor = Color.Magenta;
+            btnToolStripEditFund.Name = "btnToolStripEditFund";
+            btnToolStripEditFund.Size = new Size(52, 52);
+            btnToolStripEditFund.Click += btnToolStripEditUser_Click;
             // 
             // btnToolStripDeleteFund
             // 
@@ -99,7 +99,6 @@
             btnToolStripDeleteFund.ImageTransparentColor = Color.Magenta;
             btnToolStripDeleteFund.Name = "btnToolStripDeleteFund";
             btnToolStripDeleteFund.Size = new Size(52, 52);
-            btnToolStripDeleteFund.Text = "toolStripButton1";
             btnToolStripDeleteFund.Click += btnToolStripDeleteFund_Click;
             // 
             // lblSearch
@@ -108,8 +107,8 @@
             lblSearch.ForeColor = Color.FromArgb(0, 64, 64);
             lblSearch.ImageAlign = ContentAlignment.TopCenter;
             lblSearch.Name = "lblSearch";
-            lblSearch.Size = new Size(347, 52);
-            lblSearch.Text = "جستجو (عنوان، درآمد ، نام و نام خانوادگی برنده):";
+            lblSearch.Size = new Size(170, 52);
+            lblSearch.Text = "جستجو (عنوان، درآمد):";
             // 
             // txtSearch
             // 
@@ -119,6 +118,28 @@
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new Size(250, 30);
             txtSearch.TextChanged += txtSearch_TextChanged;
+            // 
+            // btnToolStriplottery
+            // 
+            btnToolStriplottery.Alignment = ToolStripItemAlignment.Right;
+            btnToolStriplottery.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            btnToolStriplottery.Image = Properties.Resources.lottery_icon;
+            btnToolStriplottery.ImageTransparentColor = Color.Magenta;
+            btnToolStriplottery.Name = "btnToolStriplottery";
+            btnToolStriplottery.Size = new Size(52, 52);
+            btnToolStriplottery.Text = "toolStrip";
+            btnToolStriplottery.Click += btnToolStriplottery_Click;
+            // 
+            // btnToolStripAddUser
+            // 
+            btnToolStripAddUser.Alignment = ToolStripItemAlignment.Right;
+            btnToolStripAddUser.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            btnToolStripAddUser.Image = Properties.Resources.add_user_icon;
+            btnToolStripAddUser.ImageTransparentColor = Color.Magenta;
+            btnToolStripAddUser.Name = "btnToolStripAddUser";
+            btnToolStripAddUser.RightToLeft = RightToLeft.No;
+            btnToolStripAddUser.Size = new Size(52, 52);
+            btnToolStripAddUser.Click += btnToolStripAddUser_Click;
             // 
             // statusStrip1
             // 
@@ -161,7 +182,7 @@
             dgvFunds.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvFunds.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvFunds.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvFunds.Columns.AddRange(new DataGridViewColumn[] { FundId, Title, FirstName, LastName, Income, IsActive, CreatedDate });
+            dgvFunds.Columns.AddRange(new DataGridViewColumn[] { FundId, Title, Income, IsActive, CreatedDate });
             dgvFunds.Location = new Point(0, 58);
             dgvFunds.Name = "dgvFunds";
             dgvFunds.RowHeadersWidth = 51;
@@ -182,20 +203,6 @@
             Title.HeaderText = "عنوان";
             Title.MinimumWidth = 6;
             Title.Name = "Title";
-            // 
-            // FirstName
-            // 
-            FirstName.DataPropertyName = "FirstName";
-            FirstName.HeaderText = "نام برنده";
-            FirstName.MinimumWidth = 6;
-            FirstName.Name = "FirstName";
-            // 
-            // LastName
-            // 
-            LastName.DataPropertyName = "LastName";
-            LastName.HeaderText = "نام خانوادگی برنده";
-            LastName.MinimumWidth = 6;
-            LastName.Name = "LastName";
             // 
             // Income
             // 
@@ -218,7 +225,7 @@
             CreatedDate.MinimumWidth = 6;
             CreatedDate.Name = "CreatedDate";
             // 
-            // frmLottary
+            // frmFund
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -227,11 +234,11 @@
             Controls.Add(statusStrip1);
             Controls.Add(toolStrip1);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Name = "frmLottary";
+            Name = "frmFund";
             RightToLeft = RightToLeft.Yes;
             RightToLeftLayout = true;
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "قرعه کشی";
+            Text = "وام ها";
             Load += frmLottary_Load;
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
@@ -246,7 +253,7 @@
         private ToolStrip toolStrip1;
         private ToolStripButton btnToolStripBack;
         private ToolStripButton btnToolStripAddFund;
-        private ToolStripButton btnToolStripEditUser;
+        private ToolStripButton btnToolStripEditFund;
         private ToolStripButton btnToolStripDeleteFund;
         private ToolStripLabel lblSearch;
         private ToolStripTextBox txtSearch;
@@ -257,10 +264,10 @@
         private DataGridView dgvFunds;
         private DataGridViewTextBoxColumn FundId;
         private DataGridViewTextBoxColumn Title;
-        private DataGridViewTextBoxColumn FirstName;
-        private DataGridViewTextBoxColumn LastName;
         private DataGridViewTextBoxColumn Income;
         private DataGridViewTextBoxColumn IsActive;
         private DataGridViewTextBoxColumn CreatedDate;
+        private ToolStripButton btnToolStripAddUser;
+        private ToolStripButton btnToolStriplottery;
     }
 }

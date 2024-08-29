@@ -66,6 +66,7 @@ namespace HousingFund.DAL.Repositories.Implementation
                                                 uf.User.FirstName.Contains(search) ||
                                                 uf.User.LastName.Contains(search)
                                           )
+                                   .OrderByDescending(uf => uf.CreatedDate)
                                    .Select(uf => new DisplayUserFundsVM
                                    {
                                        FundId = uf.FundId.ToString(),
@@ -212,6 +213,7 @@ namespace HousingFund.DAL.Repositories.Implementation
                     if (db_UserFund != null)
                     {
                         db_UserFund.IsWinner = true;
+                        db_UserFund.CreatedDate = DateTime.Now;
 
                         _context.UserFunds.Update(db_UserFund);
                     }

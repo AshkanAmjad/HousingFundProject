@@ -213,15 +213,6 @@ namespace HousingFundProject.Forms.Lottary
                         messageForm.ShowDialog();
                     }
                 }
-
-
-
-
-
-
-
-
-
             }
         }
     }

@@ -98,6 +98,7 @@ namespace HousingFund.DAL.Repositories.Implementation
                 var users = context.Where(u => u.NationalCode.Contains(search) ||
                                                u.FirstName.Contains(search) ||
                                                u.LastName.Contains(search))
+                                   .OrderByDescending(u => u.RegisterDate)
                                    .Select(u => new DisplayUsersVM
                                    {
                                        userId = u.UserId.ToString(),
@@ -109,7 +110,7 @@ namespace HousingFund.DAL.Repositories.Implementation
                                        IsAdmin = (u.IsAdmin ? "فعال" : "غیر فعال"),
                                        NationalCode = u.NationalCode,
                                        PhoneNumber = u.PhoneNumber,
-                                       RegisterDate = $"{u.RegisterDate.ToShamsi()}",
+                                       RegisterDate = u.RegisterDate.ToShamsi(),
                                    }).ToList();
                 return users;
             }
@@ -258,8 +259,6 @@ namespace HousingFund.DAL.Repositories.Implementation
                               .FirstOrDefault();
             return user;
         }
-
-
 
         public void SaveChanges()
         {

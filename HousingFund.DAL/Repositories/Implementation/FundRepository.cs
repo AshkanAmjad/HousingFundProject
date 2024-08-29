@@ -158,9 +158,10 @@ namespace HousingFund.DAL.Repositories.Implementation
             using (HousingFundContext db = new())
             {
                 var context = GetFundsQuery();
-                var funds = context.Where(u => u.Title.Contains(search) ||
-                                               u.Income.Contains(search)
+                var funds = context.Where(f => f.Title.Contains(search) ||
+                                               f.Income.Contains(search)
                                           )
+                                   .OrderByDescending(f => f.CreatedDate)
                                    .Select(f => new DisplayFundsVM
                                    {
                                        FundId = f.FundId.ToString(),

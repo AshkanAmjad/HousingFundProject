@@ -18,7 +18,7 @@ namespace HousingFund.DAL.Repositories.Implementation
     {
 
         #region Constructor
-        private HousingFundContext _context;
+        private readonly HousingFundContext _context;
         private readonly IMapper _mapper;
 
         public UserRepository()
@@ -183,7 +183,7 @@ namespace HousingFund.DAL.Repositories.Implementation
             }
 
             User db = _context.Users
-                             .Find(model.UserId);
+                              .Find(model.UserId);
 
             if (db != null)
             {
@@ -216,7 +216,8 @@ namespace HousingFund.DAL.Repositories.Implementation
 
         public bool Delete(Guid userId, out string message)
         {
-            string checkMessage = "";
+            string  checkMessage = "عملیات حذف با شکست مواجه شد.";
+
             if (userId != Guid.Empty)
             {
                 using (HousingFundContext context = new())
@@ -235,27 +236,25 @@ namespace HousingFund.DAL.Repositories.Implementation
                     return true;
                 }
             }
-            checkMessage = "عملیات حذف با شکست مواجه شد.";
             message = checkMessage;
             return false;
         }
 
         public EditUserVM GetUserById(Guid userId)
         {
-            var context = GetUsersQuery();
-            var user = context.Where(u => u.UserId == userId)
-                              .Select(u => new EditUserVM
-                              {
-                                  UserId = u.UserId,
-                                  UserName = u.UserName,
-                                  PhoneNumber = u.PhoneNumber,
-                                  FirstName = u.FirstName,
-                                  LastName = u.LastName,
-                                  NationalCode = u.NationalCode,
-                                  IsActive = u.IsActive,
-                                  IsAdmin = u.IsAdmin,
-                                  Address = u.Address
-                              })
+            var user = _context.Users.Where(u => u.UserId == userId)
+                                     .Select(u => new EditUserVM
+                                     {
+                                         UserId = u.UserId,
+                                         UserName = u.UserName,
+                                         PhoneNumber = u.PhoneNumber,
+                                         FirstName = u.FirstName,
+                                         LastName = u.LastName,
+                                         NationalCode = u.NationalCode,
+                                         IsActive = u.IsActive,
+                                         IsAdmin = u.IsAdmin,
+                                         Address = u.Address
+                                     })
                               .FirstOrDefault();
             return user;
         }

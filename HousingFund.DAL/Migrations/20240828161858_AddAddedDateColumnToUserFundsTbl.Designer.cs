@@ -4,6 +4,7 @@ using HousingFund.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HousingFund.DAL.Migrations
 {
     [DbContext(typeof(HousingFundContext))]
-    partial class HousingFundContextModelSnapshot : ModelSnapshot
+    [Migration("20240828161858_AddAddedDateColumnToUserFundsTbl")]
+    partial class AddAddedDateColumnToUserFundsTbl
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,7 +54,7 @@ namespace HousingFund.DAL.Migrations
                     b.Property<Guid>("UserFundId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime>("AddedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("FundId")
@@ -126,7 +129,7 @@ namespace HousingFund.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("0558af98-b8d5-4d8e-bc49-b3c3ce6226b8"),
+                            UserId = new Guid("27527c4d-8ea6-469d-aff8-ecfa391fb150"),
                             Address = "کرج، فردیس، کانال غربی",
                             FirstName = "اشکان",
                             IsActive = true,
@@ -135,7 +138,7 @@ namespace HousingFund.DAL.Migrations
                             NationalCode = "0021047022",
                             Password = "MTIzZkBAa2ZAaGJoanNoYmtpaHF3JSRrNDU0ISEtWg==",
                             PhoneNumber = "09351225600",
-                            RegisterDate = new DateTime(2024, 8, 29, 0, 22, 56, 474, DateTimeKind.Local).AddTicks(192),
+                            RegisterDate = new DateTime(2024, 8, 28, 19, 48, 57, 905, DateTimeKind.Local).AddTicks(3183),
                             UserName = "AshkanAmjad"
                         });
                 });

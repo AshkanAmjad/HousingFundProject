@@ -20,11 +20,14 @@ namespace HousingFundProject.Forms.Lottary
 {
     public partial class frmFund : Form
     {
-        IFundRepository _fundRepository = new FundRepository();
+        private readonly IFundRepository _fundRepository;
+        private readonly IUserFundRepository _userFundRepository;
 
         public frmFund()
         {
             InitializeComponent();
+            _fundRepository = new FundRepository();
+            _userFundRepository = new UserFundRepository();
         }
 
         private void btnToolStripBack_Click(object sender, EventArgs e)
@@ -56,11 +59,11 @@ namespace HousingFundProject.Forms.Lottary
 
         private void btnToolStripDeleteFund_Click(object sender, EventArgs e)
         {
-            var message = "";
-            var checkMessage = "";
-
             if (dgvFunds.CurrentRow != null)
             {
+                var message = "";
+                var checkMessage = "";
+
                 DialogResult boxResult = frmCustomMessageBox.Show("آیا از حذف این قرعه مطمئن هستید؟");
 
                 if (boxResult == DialogResult.Yes)
@@ -74,7 +77,6 @@ namespace HousingFundProject.Forms.Lottary
 
                         if (result)
                         {
-                            _fundRepository.SaveChanges();
                             message = "عملیات حذف با موفقیت انجام شد.";
                         }
                         else if (!result)
@@ -128,7 +130,7 @@ namespace HousingFundProject.Forms.Lottary
             dgvFunds.DataSource = funds;
         }
 
-        private void btnToolStripEditUser_Click(object sender, EventArgs e)
+        private void btnToolStripEditFund_Click(object sender, EventArgs e)
         {
             if (dgvFunds.CurrentRow != null)
             {
@@ -146,16 +148,28 @@ namespace HousingFundProject.Forms.Lottary
 
         private void btnToolStripAddUser_Click(object sender, EventArgs e)
         {
-            if(dgvFunds.CurrentRow != null)
+            if (dgvFunds.CurrentRow != null)
             {
                 string id = dgvFunds.CurrentRow.Cells[0].Value.ToString();
                 Guid fundId = new Guid(id);
 
-                this.Close();
+                bool isActive = _fundRepository.IsActive(fundId);
 
-                frmAddUserFund add = new();
-                add.Id = fundId;
-                add.Show();
+                if (isActive)
+                {
+                    this.Close();
+
+                    frmUserFund add = new();
+                    add.Id = fundId;
+                    add.Show();
+                }
+                else if (!isActive)
+                {
+                    var message = "این قرعه غیر فعال است.";
+                    frmMessage messageForm = new(message);
+                    messageForm.ShowDialog();
+                }
+
             }
         }
 
@@ -163,10 +177,50 @@ namespace HousingFundProject.Forms.Lottary
         {
             if (dgvFunds.CurrentRow != null)
             {
-                string id = dgvFunds.CurrentRow.Cells[0].Value.ToString();
-                Guid fundId = new Guid(id);
 
-                
+                var message = "";
+                var checkMessage = "";
+
+                DialogResult boxResult = frmCustomMessageBox.Show("آیا از انجام قرعه کشی مطمئن هستید؟");
+
+                if (boxResult == DialogResult.Yes)
+                {
+                    try
+                    {
+                        string id = dgvFunds.CurrentRow.Cells[0].Value.ToString();
+                        Guid fundId = new Guid(id);
+
+                        bool result = _userFundRepository.Lottery(fundId, out checkMessage);
+
+                        message = checkMessage;
+                        _userFundRepository.SaveChanges();
+
+                    }
+                    catch (Exception ex)
+                    {
+                        while (ex.InnerException != null)
+                        {
+                            ex = ex.InnerException;
+                        }
+                        message = $"خطای داخلی : {ex.Message}";
+                    }
+
+                    BindGrid();
+
+                    if (message != "")
+                    {
+                        frmMessage messageForm = new(message);
+                        messageForm.ShowDialog();
+                    }
+                }
+
+
+
+
+
+
+
+
 
             }
         }

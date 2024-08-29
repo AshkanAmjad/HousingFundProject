@@ -38,7 +38,7 @@
             lblSearch = new ToolStripLabel();
             txtSearch = new ToolStripTextBox();
             btnToolStriplottery = new ToolStripButton();
-            btnToolStripAddUser = new ToolStripButton();
+            btnToolStripAddFundUser = new ToolStripButton();
             statusStrip1 = new StatusStrip();
             lblDate = new ToolStripStatusLabel();
             lblTime = new ToolStripStatusLabel();
@@ -57,7 +57,7 @@
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new Size(48, 48);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { btnToolStripBack, btnToolStripAddFund, btnToolStripEditFund, btnToolStripDeleteFund, lblSearch, txtSearch, btnToolStriplottery, btnToolStripAddUser });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { btnToolStripBack, btnToolStripAddFund, btnToolStripEditFund, btnToolStripDeleteFund, lblSearch, txtSearch, btnToolStriplottery, btnToolStripAddFundUser });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(1170, 55);
@@ -90,7 +90,7 @@
             btnToolStripEditFund.ImageTransparentColor = Color.Magenta;
             btnToolStripEditFund.Name = "btnToolStripEditFund";
             btnToolStripEditFund.Size = new Size(52, 52);
-            btnToolStripEditFund.Click += btnToolStripEditUser_Click;
+            btnToolStripEditFund.Click += btnToolStripEditFund_Click;
             // 
             // btnToolStripDeleteFund
             // 
@@ -130,16 +130,16 @@
             btnToolStriplottery.Text = "toolStrip";
             btnToolStriplottery.Click += btnToolStriplottery_Click;
             // 
-            // btnToolStripAddUser
+            // btnToolStripAddFundUser
             // 
-            btnToolStripAddUser.Alignment = ToolStripItemAlignment.Right;
-            btnToolStripAddUser.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            btnToolStripAddUser.Image = Properties.Resources.add_user_icon;
-            btnToolStripAddUser.ImageTransparentColor = Color.Magenta;
-            btnToolStripAddUser.Name = "btnToolStripAddUser";
-            btnToolStripAddUser.RightToLeft = RightToLeft.No;
-            btnToolStripAddUser.Size = new Size(52, 52);
-            btnToolStripAddUser.Click += btnToolStripAddUser_Click;
+            btnToolStripAddFundUser.Alignment = ToolStripItemAlignment.Right;
+            btnToolStripAddFundUser.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            btnToolStripAddFundUser.Image = Properties.Resources.add_user_icon;
+            btnToolStripAddFundUser.ImageTransparentColor = Color.Magenta;
+            btnToolStripAddFundUser.Name = "btnToolStripAddFundUser";
+            btnToolStripAddFundUser.RightToLeft = RightToLeft.No;
+            btnToolStripAddFundUser.Size = new Size(52, 52);
+            btnToolStripAddFundUser.Click += btnToolStripAddUser_Click;
             // 
             // statusStrip1
             // 
@@ -238,7 +238,7 @@
             RightToLeft = RightToLeft.Yes;
             RightToLeftLayout = true;
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "وام ها";
+            Text = "قرعه ها";
             Load += frmLottary_Load;
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
@@ -267,7 +267,7 @@
         private DataGridViewTextBoxColumn Income;
         private DataGridViewTextBoxColumn IsActive;
         private DataGridViewTextBoxColumn CreatedDate;
-        private ToolStripButton btnToolStripAddUser;
+        private ToolStripButton btnToolStripAddFundUser;
         private ToolStripButton btnToolStriplottery;
     }
 }

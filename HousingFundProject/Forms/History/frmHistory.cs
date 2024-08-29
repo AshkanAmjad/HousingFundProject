@@ -16,5 +16,6 @@ namespace HousingFundProject.Forms.History
         {
             InitializeComponent();
         }
+
     }
 }

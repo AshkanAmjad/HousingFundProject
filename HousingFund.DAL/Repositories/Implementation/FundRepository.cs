@@ -18,14 +18,12 @@ namespace HousingFund.DAL.Repositories.Implementation
     public class FundRepository : IFundRepository
     {
         #region Constructor
-        private HousingFundContext _context;
-        private IUserRepository _userRepository;
+        private readonly HousingFundContext _context;
         private readonly IMapper _mapper;
 
         public FundRepository()
         {
             _context = new HousingFundContext();
-            _userRepository = new UserRepository();
             var mappingConfig = new MappingConfig();
             _mapper = mappingConfig.CreateMapper();
         }
@@ -41,28 +39,36 @@ namespace HousingFund.DAL.Repositories.Implementation
         {
             string checkMessage = "";
 
+            var similarity = Similarity(model.Title, out checkMessage);
+
+            if (similarity)
+            {
+                message = checkMessage;
+                return false;
+            }
+
             Fund fund = _mapper.Map<Fund>(model);
             fund.FundId = Guid.NewGuid();
 
             _context.Funds.Add(fund);
 
-            message = "";
+            message = checkMessage;
             return true;
         }
 
         public EditFundVM GetFundById(Guid fundId)
         {
-            var context = GetFundsQuery();
 
-            var fund = context.Where(f => f.FundId == fundId)
-                              .Select(f => new EditFundVM
-                              {
-                                  FundId = f.FundId,
-                                  Income = f.Income,
-                                  IsActive = f.IsActive
+            var fund = _context.Funds.Where(f => f.FundId == fundId)
+                                     .Select(f => new EditFundVM
+                                     {
+                                         FundId = f.FundId,
+                                         Income = f.Income,
+                                         Title = f.Title,
+                                         IsActive = f.IsActive
 
-                              })
-                             .FirstOrDefault();
+                                     })
+                                    .FirstOrDefault();
             return fund;
         }
 
@@ -75,6 +81,14 @@ namespace HousingFund.DAL.Repositories.Implementation
         {
             string checkMessage = "";
 
+            var similarity = Similarity(model.Title, out checkMessage);
+
+            if (similarity)
+            {
+                message = checkMessage;
+                return false;
+            }
+
             Fund fund = _mapper.Map<Fund>(model);
 
             Fund db = _context.Funds
@@ -84,7 +98,6 @@ namespace HousingFund.DAL.Repositories.Implementation
             {
                 db.Title = fund.Title;
                 db.CreatedDate = fund.CreatedDate;
-                db.IsActive = fund.IsActive;
                 db.Income = fund.Income;
 
                 _context.Funds.Update(db);
@@ -142,11 +155,11 @@ namespace HousingFund.DAL.Repositories.Implementation
 
         public List<DisplayFundsVM> Search(string search)
         {
-            using(HousingFundContext db = new())
+            using (HousingFundContext db = new())
             {
                 var context = GetFundsQuery();
                 var funds = context.Where(u => u.Title.Contains(search) ||
-                                               u.Income.Contains(search) 
+                                               u.Income.Contains(search)
                                           )
                                    .Select(f => new DisplayFundsVM
                                    {
@@ -159,5 +172,30 @@ namespace HousingFund.DAL.Repositories.Implementation
                 return funds;
             }
         }
+
+        public bool Similarity(string Title, out string message)
+        {
+            var context = GetFundsQuery();
+
+            bool checkFund = context.Where(u => u.Title == Title && u.IsActive)
+                                    .Any();
+
+            if (checkFund)
+            {
+                message = "قرعه ای با این عنوان قبلا ثبت شده است.";
+                return checkFund;
+            }
+
+            message = "";
+            return false;
+        }
+
+        public bool IsActive(Guid fundId)
+           => _context.Funds.Where(f => f.FundId == fundId && f.IsActive)
+                            .Any();
+           
+        
+
+
     }
 }

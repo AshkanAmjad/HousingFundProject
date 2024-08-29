@@ -2,6 +2,7 @@
 using HousingFund.DAL.Entities.Portal.Fund.Models;
 using HousingFund.DAL.Entities.Security.User.Models;
 using HousingFund.DAL.ViewModels.Portal.Fund;
+using HousingFund.DAL.ViewModels.Portal.UserFund;
 using HousingFund.DAL.ViewModels.Security.User;
 using System;
 using System.Collections.Generic;
@@ -53,10 +54,19 @@ namespace HousingFund.DAL.Mapping
                    .ForMember(dest => dest.Income, opt => opt.MapFrom(src => src.Income));
 
                 cfg.CreateMap<EditFundVM, Fund>()
-                   .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => src.IsActive))
                    .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
                    .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(src => src.UpdateDate))
                    .ForMember(dest => dest.Income, opt => opt.MapFrom(src => src.Income));
+
+                #endregion
+
+                #region UserFund
+
+                cfg.CreateMap<RegisterUserFundVM, UserFund>()
+                   .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId))
+                   .ForMember(dest => dest.FundId, opt => opt.MapFrom(src => src.FundId))
+                   .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(src => src.CreatedDate))
+                   .ForMember(dest => dest.IsWinner, opt => opt.MapFrom(src => src.IsWinner));
 
                 #endregion
             });

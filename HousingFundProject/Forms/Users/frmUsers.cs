@@ -8,10 +8,12 @@ namespace HousingFundProject.Forms.Users
 {
     public partial class frmUsers : Form
     {
-        IUserRepository _userRepository = new UserRepository();
+        private readonly IUserRepository _userRepository;
         public frmUsers()
         {
             InitializeComponent();
+
+            _userRepository = new UserRepository();
         }
 
         private void frmUsers_Load(object sender, EventArgs e)
@@ -85,11 +87,10 @@ namespace HousingFundProject.Forms.Users
 
         private void btnToolStripDeleteUser_Click(object sender, EventArgs e)
         {
-            var message = "";
-            var checkMessage = "";
-
             if (dgvUsers.CurrentRow != null)
             {
+                var message = "";
+                var checkMessage = "";
 
                 DialogResult boxResult = frmCustomMessageBox.Show("آیا از حذف این کاربر مطمئن هستید؟");
 

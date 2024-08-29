@@ -9,11 +9,13 @@ namespace HousingFundProject.Account
 {
     public partial class frmLogin : Form
     {
-        IUserRepository _userRepository = new UserRepository();
+        private readonly IUserRepository _userRepository;
 
         public frmLogin()
         {
             InitializeComponent();
+
+            _userRepository = new UserRepository();
         }
 
         private void btnLogin_Click(object sender, EventArgs e)

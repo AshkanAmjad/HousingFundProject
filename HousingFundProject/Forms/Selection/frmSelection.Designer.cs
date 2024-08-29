@@ -106,7 +106,7 @@
             btnLottary.RightToLeft = RightToLeft.No;
             btnLottary.Size = new Size(466, 111);
             btnLottary.TabIndex = 8;
-            btnLottary.Text = "وام ها";
+            btnLottary.Text = "قرعه ها";
             btnLottary.UseVisualStyleBackColor = false;
             btnLottary.Click += btnLottary_Click;
             // 

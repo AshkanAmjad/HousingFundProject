@@ -14,11 +14,13 @@ namespace HousingFund.DAL.Entities.Portal.Fund.Models
         [Key]
         public Guid UserFundId { get; set; }
 
-        public Guid? UserId { get; set; }
+        public Guid UserId { get; set; }
 
-        public Guid? FundId { get; set; }
+        public Guid FundId { get; set; }
 
         public bool IsWinner {  get; set; }
+
+        public DateTime CreatedDate { get; set; }
         #endregion
 
         #region Realations

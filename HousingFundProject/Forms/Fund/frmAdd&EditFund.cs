@@ -18,10 +18,13 @@ namespace HousingFundProject.Forms.Lottary
     public partial class frmAdd_EditFund : Form
     {
         public Guid Id = Guid.Empty;
-        IFundRepository _fundRepository = new FundRepository();
+
+        private readonly IFundRepository _fundRepository;
         public frmAdd_EditFund()
         {
             InitializeComponent();
+
+            _fundRepository = new FundRepository();
         }
 
         private bool Validation()
@@ -50,10 +53,8 @@ namespace HousingFundProject.Forms.Lottary
         {
             if (Id != Guid.Empty)
             {
-                this.Text = "ویرایش وام";
+                this.Text = "ویرایش قرعه";
                 btnAdd_EditFund.Text = "ویرایش";
-                lblIsActive.Visible = true;
-                chbIsActive.Visible = true;
 
                 var fund = _fundRepository.GetFundById(Id);
 
@@ -61,7 +62,6 @@ namespace HousingFundProject.Forms.Lottary
                 {
                     txtIncome.Text = fund.Income;
                     txtTitle.Text = fund.Title;
-                    chbIsActive.Checked = fund.IsActive;
                 }
             }
 
@@ -70,11 +70,11 @@ namespace HousingFundProject.Forms.Lottary
 
         private void btnAdd_EditFund_Click(object sender, EventArgs e)
         {
-            var message = "";
-            var checkMessage = "";
-
             if (Validation())
             {
+                var message = "";
+                var checkMessage = "";
+
                 try
                 {
                     if (Id == Guid.Empty)
@@ -106,7 +106,7 @@ namespace HousingFundProject.Forms.Lottary
                         EditFundVM fund = new()
                         {
                             FundId = Id,
-                            Title = txtIncome.Text,
+                            Title = txtTitle.Text,
                             Income = txtIncome.Text,
                             UpdateDate = DateTime.Now,
                         };
@@ -135,13 +135,14 @@ namespace HousingFundProject.Forms.Lottary
                     }
                     message = $"خطای داخلی : {ex.Message}";
                 }
+
+                if (message != "")
+                {
+                    frmMessage messageForm = new(message);
+                    messageForm.ShowDialog();
+                }
             }
 
-            if (message != "")
-            {
-                frmMessage messageForm = new(message);
-                messageForm.ShowDialog();
-            }
         }
     }
 }

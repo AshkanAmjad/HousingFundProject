@@ -17,20 +17,22 @@ namespace HousingFundProject.Forms.Users
     public partial class frmAdd_EditUser : Form
     {
         public Guid Id = Guid.Empty;
-        IUserRepository _userRepository = new UserRepository();
+        private readonly IUserRepository _userRepository;
 
         public frmAdd_EditUser()
         {
             InitializeComponent();
+
+            _userRepository = new UserRepository();
         }
 
         private void btnAdd_EditUser_Click(object sender, EventArgs e)
         {
-            var message = "";
-            var checkMessage = "";
-
             if (Validation())
             {
+                var message = "";
+                var checkMessage = "";
+
                 try
                 {
                     if (Id == Guid.Empty)
@@ -104,14 +106,13 @@ namespace HousingFundProject.Forms.Users
                     }
                     message = $"خطای داخلی : {ex.Message}";
                 }
-            }
 
-            if (message != "")
-            {
-                frmMessage messageForm = new(message);
-                messageForm.ShowDialog();
+                if (message != "")
+                {
+                    frmMessage messageForm = new(message);
+                    messageForm.ShowDialog();
+                }
             }
-
         }
 
         private bool Validation()

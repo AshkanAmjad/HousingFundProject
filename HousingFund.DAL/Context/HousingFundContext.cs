@@ -15,6 +15,7 @@ namespace HousingFund.DAL.Context
         #region Tables
         public DbSet<User> Users { get; set; }
         public DbSet<Fund> Funds { get; set; }
+        public DbSet<UserFund> UserFunds { get; set; }
         #endregion
 
         #region Connection String

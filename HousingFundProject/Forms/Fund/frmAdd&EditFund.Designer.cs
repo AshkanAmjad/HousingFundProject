@@ -28,9 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            lblTitle = new Label();
             grbUsers = new GroupBox();
-            chbIsActive = new CheckBox();
-            lblIsActive = new Label();
             lblRequiredUserName = new Label();
             lblRequiredIncome = new Label();
             lblRequiredTitle = new Label();
@@ -38,14 +37,20 @@
             txtIncome = new TextBox();
             lblIncome = new Label();
             txtTitle = new TextBox();
-            lblTitle = new Label();
             grbUsers.SuspendLayout();
             SuspendLayout();
             // 
+            // lblTitle
+            // 
+            lblTitle.AutoSize = true;
+            lblTitle.Location = new Point(354, 40);
+            lblTitle.Name = "lblTitle";
+            lblTitle.Size = new Size(57, 18);
+            lblTitle.TabIndex = 0;
+            lblTitle.Text = "عنوان :";
+            // 
             // grbUsers
             // 
-            grbUsers.Controls.Add(chbIsActive);
-            grbUsers.Controls.Add(lblIsActive);
             grbUsers.Controls.Add(lblRequiredUserName);
             grbUsers.Controls.Add(lblRequiredIncome);
             grbUsers.Controls.Add(lblRequiredTitle);
@@ -58,30 +63,10 @@
             grbUsers.ForeColor = Color.FromArgb(0, 64, 64);
             grbUsers.Location = new Point(22, 12);
             grbUsers.Name = "grbUsers";
-            grbUsers.Size = new Size(431, 213);
+            grbUsers.Size = new Size(431, 179);
             grbUsers.TabIndex = 3;
             grbUsers.TabStop = false;
-            grbUsers.Text = "افزودن وام";
-            // 
-            // chbIsActive
-            // 
-            chbIsActive.AutoSize = true;
-            chbIsActive.Location = new Point(259, 117);
-            chbIsActive.Name = "chbIsActive";
-            chbIsActive.Size = new Size(18, 17);
-            chbIsActive.TabIndex = 11;
-            chbIsActive.UseVisualStyleBackColor = true;
-            chbIsActive.Visible = false;
-            // 
-            // lblIsActive
-            // 
-            lblIsActive.AutoSize = true;
-            lblIsActive.Location = new Point(346, 115);
-            lblIsActive.Name = "lblIsActive";
-            lblIsActive.Size = new Size(65, 18);
-            lblIsActive.TabIndex = 0;
-            lblIsActive.Text = "فعالیت :";
-            lblIsActive.Visible = false;
+            grbUsers.Text = "افزودن قرعه";
             // 
             // lblRequiredUserName
             // 
@@ -120,7 +105,7 @@
             btnAdd_EditFund.BackColor = Color.Silver;
             btnAdd_EditFund.Cursor = Cursors.Hand;
             btnAdd_EditFund.ForeColor = Color.FromArgb(0, 64, 64);
-            btnAdd_EditFund.Location = new Point(147, 159);
+            btnAdd_EditFund.Location = new Point(147, 122);
             btnAdd_EditFund.Name = "btnAdd_EditFund";
             btnAdd_EditFund.Size = new Size(130, 41);
             btnAdd_EditFund.TabIndex = 9;
@@ -151,20 +136,11 @@
             txtTitle.Size = new Size(252, 26);
             txtTitle.TabIndex = 1;
             // 
-            // lblTitle
-            // 
-            lblTitle.AutoSize = true;
-            lblTitle.Location = new Point(354, 40);
-            lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(57, 18);
-            lblTitle.TabIndex = 0;
-            lblTitle.Text = "عنوان :";
-            // 
             // frmAdd_EditFund
             // 
             AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(474, 242);
+            ClientSize = new Size(474, 207);
             Controls.Add(grbUsers);
             Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             ForeColor = Color.FromArgb(0, 64, 64);
@@ -175,7 +151,7 @@
             RightToLeft = RightToLeft.Yes;
             RightToLeftLayout = true;
             StartPosition = FormStartPosition.CenterParent;
-            Text = "افزودن وام";
+            Text = "افزودن قرعه";
             Load += frmAdd_EditFund_Load;
             grbUsers.ResumeLayout(false);
             grbUsers.PerformLayout();
@@ -183,24 +159,21 @@
         }
 
         #endregion
-
-        private GroupBox grbUsers;
-        private CheckBox chbIsActive;
         private CheckBox chbIsAdmin;
-        private Label lblIsActive;
         private Label lblIsAdmin;
-        private Label lblRequiredUserName;
         private Label lblRequiredLastName;
-        private Label lblRequiredIncome;
-        private Label lblRequiredTitle;
-        private Button btnAdd_EditFund;
         private TextBox txtUserName;
         private Label lblUserName;
         private TextBox txtLastName;
         private Label lblLastName;
+        private Label lblTitle;
+        private GroupBox grbUsers;
+        private Label lblRequiredUserName;
+        private Label lblRequiredIncome;
+        private Label lblRequiredTitle;
+        private Button btnAdd_EditFund;
         private TextBox txtIncome;
         private Label lblIncome;
         private TextBox txtTitle;
-        private Label lblTitle;
     }
 }

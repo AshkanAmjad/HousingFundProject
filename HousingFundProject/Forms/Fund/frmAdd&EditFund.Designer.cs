@@ -63,7 +63,7 @@
             grbUsers.ForeColor = Color.FromArgb(0, 64, 64);
             grbUsers.Location = new Point(22, 12);
             grbUsers.Name = "grbUsers";
-            grbUsers.Size = new Size(431, 179);
+            grbUsers.Size = new Size(431, 180);
             grbUsers.TabIndex = 3;
             grbUsers.TabStop = false;
             grbUsers.Text = "افزودن قرعه";
@@ -105,7 +105,7 @@
             btnAdd_EditFund.BackColor = Color.Silver;
             btnAdd_EditFund.Cursor = Cursors.Hand;
             btnAdd_EditFund.ForeColor = Color.FromArgb(0, 64, 64);
-            btnAdd_EditFund.Location = new Point(147, 122);
+            btnAdd_EditFund.Location = new Point(147, 126);
             btnAdd_EditFund.Name = "btnAdd_EditFund";
             btnAdd_EditFund.Size = new Size(130, 41);
             btnAdd_EditFund.TabIndex = 9;
@@ -140,7 +140,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(474, 207);
+            ClientSize = new Size(474, 206);
             Controls.Add(grbUsers);
             Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             ForeColor = Color.FromArgb(0, 64, 64);

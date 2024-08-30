@@ -25,7 +25,7 @@ namespace HousingFundProject.Forms.Lottary
             this.Close();
 
             frmSelection selection = new();
-            selection.ShowDialog();
+            selection.Show();
         }
 
         private void btnToolStripAddFund_Click(object sender, EventArgs e)
@@ -60,7 +60,7 @@ namespace HousingFundProject.Forms.Lottary
                 {
                     try
                     {
-                        string id = dgvFunds.CurrentRow.Cells[0].Value.ToString();
+                        string? id = dgvFunds.CurrentRow.Cells[0].Value.ToString();
                         Guid fundId = new Guid(id);
 
                         bool result = _fundRepository.Delete(fundId, out checkMessage);
@@ -96,6 +96,7 @@ namespace HousingFundProject.Forms.Lottary
 
         private void frmLottary_Load(object sender, EventArgs e)
         {
+
             BindGrid();
 
             lblDate.Text = DateAndTimeFormat.DateFormat();
@@ -124,7 +125,7 @@ namespace HousingFundProject.Forms.Lottary
         {
             if (dgvFunds.CurrentRow != null)
             {
-                string id = dgvFunds.CurrentRow.Cells[0].Value.ToString();
+                string? id = dgvFunds.CurrentRow.Cells[0].Value.ToString();
                 Guid fundId = new Guid(id);
 
                 frmAdd_EditFund add_edit = new();

@@ -172,7 +172,7 @@ namespace HousingFund.DAL.Repositories.Implementation
 
                 if (count == 0)
                 {
-                    message = checkMessage;
+                    message = "قرعه فاقد شرکت کننده می باشد.";
                     return false;
                 }
 

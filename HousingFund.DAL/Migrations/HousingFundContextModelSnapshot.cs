@@ -126,7 +126,7 @@ namespace HousingFund.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("0558af98-b8d5-4d8e-bc49-b3c3ce6226b8"),
+                            UserId = new Guid("9897d166-ca5f-45d4-9967-5a5adcb7bebd"),
                             Address = "کرج، فردیس، کانال غربی",
                             FirstName = "اشکان",
                             IsActive = true,
@@ -135,7 +135,7 @@ namespace HousingFund.DAL.Migrations
                             NationalCode = "0021047022",
                             Password = "MTIzZkBAa2ZAaGJoanNoYmtpaHF3JSRrNDU0ISEtWg==",
                             PhoneNumber = "09351225600",
-                            RegisterDate = new DateTime(2024, 8, 29, 0, 22, 56, 474, DateTimeKind.Local).AddTicks(192),
+                            RegisterDate = new DateTime(2024, 8, 30, 15, 29, 9, 153, DateTimeKind.Local).AddTicks(2739),
                             UserName = "AshkanAmjad"
                         });
                 });

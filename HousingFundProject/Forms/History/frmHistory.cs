@@ -33,7 +33,7 @@ namespace HousingFundProject.Forms.History
             this.Close();
 
             frmSelection selection = new();
-            selection.ShowDialog();
+            selection.Show();
         }
 
         private void BindGrid()

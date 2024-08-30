@@ -58,8 +58,6 @@ namespace HousingFund.DAL.Repositories.Implementation
                                          FundId = f.FundId,
                                          Income = f.Income,
                                          Title = f.Title,
-                                         IsActive = f.IsActive
-
                                      })
                                     .FirstOrDefault();
             return fund;
@@ -74,7 +72,7 @@ namespace HousingFund.DAL.Repositories.Implementation
         {
             string checkMessage = "";
 
-            var similarity = Similarity(model.Title, out checkMessage);
+            var similarity = Similarity(model.FundId ,model.Title , out checkMessage);
 
             if (similarity)
             {
@@ -92,7 +90,6 @@ namespace HousingFund.DAL.Repositories.Implementation
                 db.Title = fund.Title;
                 db.CreatedDate = fund.CreatedDate;
                 db.Income = fund.Income;
-                db.IsActive = fund.IsActive;
 
                 _context.Funds.Update(db);
 
@@ -168,22 +165,40 @@ namespace HousingFund.DAL.Repositories.Implementation
             }
         }
 
-        public bool Similarity(string Title, out string message)
+        public bool Similarity(string title, out string message)
         {
             var context = GetFundsQuery();
 
-            bool checkFund = context.Where(u => u.Title == Title && u.IsActive)
+            bool checkTitle = context.Where(f => f.Title == title && f.IsActive )
                                     .Any();
 
-            if (checkFund)
+            if (checkTitle)
             {
                 message = "قرعه ای با این عنوان قبلا ثبت شده است.";
-                return checkFund;
+                return checkTitle;
             }
 
             message = "";
             return false;
         }
+
+        public bool Similarity(Guid fundId, string title, out string message)
+        {
+            var context = GetFundsQuery();
+
+            bool checkTitle = context.Where(f =>f.FundId != fundId && f.Title == title && f.IsActive)
+                                    .Any();
+
+            if (checkTitle)
+            {
+                message = "قرعه ای با این عنوان قبلا ثبت شده است.";
+                return checkTitle;
+            }
+
+            message = "";
+            return false;
+        }
+
 
         public bool IsActive(Guid fundId)
            => _context.Funds.Where(f => f.FundId == fundId && f.IsActive)

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HousingFund.DAL.Migrations
 {
     [DbContext(typeof(HousingFundContext))]
-    [Migration("20240827202340_CreateDB")]
+    [Migration("20240830115909_CreateDB")]
     partial class CreateDB
     {
         /// <inheritdoc />
@@ -54,13 +54,16 @@ namespace HousingFund.DAL.Migrations
                     b.Property<Guid>("UserFundId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("FundId")
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("FundId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsWinner")
                         .HasColumnType("bit");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("UserFundId");
@@ -69,7 +72,7 @@ namespace HousingFund.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserFund");
+                    b.ToTable("UserFunds");
                 });
 
             modelBuilder.Entity("HousingFund.DAL.Entities.Security.User.Models.User", b =>
@@ -126,7 +129,7 @@ namespace HousingFund.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("430e6f7b-a551-41f4-ac6e-11cfbf705bec"),
+                            UserId = new Guid("9897d166-ca5f-45d4-9967-5a5adcb7bebd"),
                             Address = "کرج، فردیس، کانال غربی",
                             FirstName = "اشکان",
                             IsActive = true,
@@ -135,7 +138,7 @@ namespace HousingFund.DAL.Migrations
                             NationalCode = "0021047022",
                             Password = "MTIzZkBAa2ZAaGJoanNoYmtpaHF3JSRrNDU0ISEtWg==",
                             PhoneNumber = "09351225600",
-                            RegisterDate = new DateTime(2024, 8, 27, 23, 53, 40, 176, DateTimeKind.Local).AddTicks(3570),
+                            RegisterDate = new DateTime(2024, 8, 30, 15, 29, 9, 153, DateTimeKind.Local).AddTicks(2739),
                             UserName = "AshkanAmjad"
                         });
                 });
@@ -144,11 +147,15 @@ namespace HousingFund.DAL.Migrations
                 {
                     b.HasOne("HousingFund.DAL.Entities.Portal.Fund.Models.Fund", "Fund")
                         .WithMany("UserFunds")
-                        .HasForeignKey("FundId");
+                        .HasForeignKey("FundId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("HousingFund.DAL.Entities.Security.User.Models.User", "User")
                         .WithMany("UserFunds")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Fund");
 

@@ -11,6 +11,7 @@ namespace HousingFundProject.Forms.Users
         private readonly IUserRepository _userRepository;
         public frmUsers()
         {
+            
             InitializeComponent();
 
             _userRepository = new UserRepository();
@@ -33,7 +34,7 @@ namespace HousingFundProject.Forms.Users
             this.Close();
 
             frmSelection selection = new();
-            selection.ShowDialog();
+            selection.Show();
         }
 
         private void btnToolStripAddUser_Click(object sender, EventArgs e)
@@ -48,7 +49,7 @@ namespace HousingFundProject.Forms.Users
         {
             if (dgvUsers.CurrentRow != null)
             {
-                string id = dgvUsers.CurrentRow.Cells[0].Value.ToString();
+                string? id = dgvUsers.CurrentRow.Cells[0].Value.ToString();
                 Guid userId = new Guid(id);
 
                 frmAdd_EditUser add_edit = new();
@@ -98,7 +99,7 @@ namespace HousingFundProject.Forms.Users
                 {
                     try
                     {
-                        string id = dgvUsers.CurrentRow.Cells[0].Value.ToString();
+                        string? id = dgvUsers.CurrentRow.Cells[0].Value.ToString();
                         Guid userId = new Guid(id);
 
                         bool result = _userRepository.Delete(userId, out checkMessage);

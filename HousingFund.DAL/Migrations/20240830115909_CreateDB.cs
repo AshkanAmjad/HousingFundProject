@@ -48,42 +48,45 @@ namespace HousingFund.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserFund",
+                name: "UserFunds",
                 columns: table => new
                 {
                     UserFundId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    FundId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsWinner = table.Column<bool>(type: "bit", nullable: false)
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FundId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IsWinner = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserFund", x => x.UserFundId);
+                    table.PrimaryKey("PK_UserFunds", x => x.UserFundId);
                     table.ForeignKey(
-                        name: "FK_UserFund_Funds_FundId",
+                        name: "FK_UserFunds_Funds_FundId",
                         column: x => x.FundId,
                         principalTable: "Funds",
-                        principalColumn: "FundId");
+                        principalColumn: "FundId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserFund_Users_UserId",
+                        name: "FK_UserFunds_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserId");
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "UserId", "Address", "FirstName", "IsActive", "IsAdmin", "LastName", "NationalCode", "Password", "PhoneNumber", "RegisterDate", "UserName" },
-                values: new object[] { new Guid("430e6f7b-a551-41f4-ac6e-11cfbf705bec"), "کرج، فردیس، کانال غربی", "اشکان", true, true, "مطهری", "0021047022", "MTIzZkBAa2ZAaGJoanNoYmtpaHF3JSRrNDU0ISEtWg==", "09351225600", new DateTime(2024, 8, 27, 23, 53, 40, 176, DateTimeKind.Local).AddTicks(3570), "AshkanAmjad" });
+                values: new object[] { new Guid("9897d166-ca5f-45d4-9967-5a5adcb7bebd"), "کرج، فردیس، کانال غربی", "اشکان", true, true, "مطهری", "0021047022", "MTIzZkBAa2ZAaGJoanNoYmtpaHF3JSRrNDU0ISEtWg==", "09351225600", new DateTime(2024, 8, 30, 15, 29, 9, 153, DateTimeKind.Local).AddTicks(2739), "AshkanAmjad" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserFund_FundId",
-                table: "UserFund",
+                name: "IX_UserFunds_FundId",
+                table: "UserFunds",
                 column: "FundId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserFund_UserId",
-                table: "UserFund",
+                name: "IX_UserFunds_UserId",
+                table: "UserFunds",
                 column: "UserId");
         }
 
@@ -91,7 +94,7 @@ namespace HousingFund.DAL.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "UserFund");
+                name: "UserFunds");
 
             migrationBuilder.DropTable(
                 name: "Funds");

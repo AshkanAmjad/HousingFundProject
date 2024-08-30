@@ -3,6 +3,7 @@ using HousingFund.DAL.Repositories.Implementation;
 using HousingFund.DAL.Repositories.Interface;
 using HousingFundProject.Forms.Lottary;
 using HousingFundProject.Forms.Messages;
+using HousingFundProject.Forms.Selection;
 using HousingFundProject.Forms.UserFund;
 using HousingFundProject.Utilities;
 
@@ -36,16 +37,10 @@ namespace HousingFundProject.Forms.Fund
 
         private void btnToolStripBack_Click(object sender, EventArgs e)
         {
-            dgvUserFunds.EnableHeadersVisualStyles = false;
-            dgvUserFunds.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
-
             this.Close();
 
-            frmFund fund = new();
-            fund.Show();
-
-            dgvUserFunds.EnableHeadersVisualStyles = true;
-            dgvUserFunds.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            frmSelection selection = new();
+            selection.Show();
         }
 
         private void btnToolStripAddUserFund_Click(object sender, EventArgs e)
@@ -64,13 +59,14 @@ namespace HousingFundProject.Forms.Fund
                 var message = "";
                 var checkMessage = "";
 
-                DialogResult boxResult = frmCustomMessageBox.Show("آیا از حذف این قرعه مطمئن هستید؟");
+                DialogResult boxResult = frmCustomMessageBox.Show("آیا از حذف این شرکت کننده از قرعه مطمئن هستید؟");
 
                 if (boxResult == DialogResult.Yes)
                 {
                     try
                     {
-                        string id = dgvUserFunds.CurrentRow.Cells[0].Value.ToString();
+                        string? id = dgvUserFunds.CurrentRow.Cells[0].Value.ToString();
+
                         Guid userFundId = new Guid(id);
 
                         bool result = _userfundRepository.Delete(userFundId, out checkMessage);
@@ -83,6 +79,7 @@ namespace HousingFundProject.Forms.Fund
                         {
                             message = checkMessage;
                         }
+
                     }
                     catch (Exception ex)
                     {

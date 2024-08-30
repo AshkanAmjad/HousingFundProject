@@ -5,9 +5,7 @@ using HousingFund.DAL.Mapping;
 using HousingFund.DAL.Repositories.Interface;
 using HousingFund.DAL.Utilities;
 using HousingFund.DAL.ViewModels.Portal.History;
-using HousingFund.DAL.ViewModels.Security.User;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HousingFund.DAL.Repositories.Implementation
 {

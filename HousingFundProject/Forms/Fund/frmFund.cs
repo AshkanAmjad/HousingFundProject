@@ -4,17 +4,7 @@ using HousingFund.DAL.Repositories.Interface;
 using HousingFundProject.Forms.Fund;
 using HousingFundProject.Forms.Messages;
 using HousingFundProject.Forms.Selection;
-using HousingFundProject.Forms.Users;
 using HousingFundProject.Utilities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace HousingFundProject.Forms.Lottary
 {

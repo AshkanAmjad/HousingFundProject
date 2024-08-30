@@ -2,15 +2,6 @@
 using HousingFundProject.Forms.Lottary;
 using HousingFundProject.Forms.Users;
 using HousingFundProject.Utilities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace HousingFundProject.Forms.Selection
 {

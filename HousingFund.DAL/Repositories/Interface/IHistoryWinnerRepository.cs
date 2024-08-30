@@ -1,11 +1,5 @@
 ﻿using HousingFund.DAL.Entities.Portal.Fund.Models;
 using HousingFund.DAL.ViewModels.Portal.History;
-using HousingFund.DAL.ViewModels.Portal.UserFund;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HousingFund.DAL.Repositories.Interface
 {

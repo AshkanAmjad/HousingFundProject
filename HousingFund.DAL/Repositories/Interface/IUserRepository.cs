@@ -1,11 +1,6 @@
 ﻿using HousingFund.DAL.Entities.Security.User.Models;
 using HousingFund.DAL.ViewModels.Security.Login;
 using HousingFund.DAL.ViewModels.Security.User;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HousingFund.DAL.Repositories.Interface
 {

@@ -5,13 +5,6 @@ using HousingFund.DAL.Mapping;
 using HousingFund.DAL.Repositories.Interface;
 using HousingFund.DAL.Utilities;
 using HousingFund.DAL.ViewModels.Portal.Fund;
-using HousingFund.DAL.ViewModels.Security.User;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HousingFund.DAL.Repositories.Implementation
 {
@@ -99,6 +92,7 @@ namespace HousingFund.DAL.Repositories.Implementation
                 db.Title = fund.Title;
                 db.CreatedDate = fund.CreatedDate;
                 db.Income = fund.Income;
+                db.IsActive = fund.IsActive;
 
                 _context.Funds.Update(db);
 
@@ -194,9 +188,5 @@ namespace HousingFund.DAL.Repositories.Implementation
         public bool IsActive(Guid fundId)
            => _context.Funds.Where(f => f.FundId == fundId && f.IsActive)
                             .Any();
-           
-        
-
-
     }
 }

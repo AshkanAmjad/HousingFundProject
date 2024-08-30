@@ -4,15 +4,8 @@ using HousingFund.DAL.Entities.Portal.Fund.Models;
 using HousingFund.DAL.Mapping;
 using HousingFund.DAL.Repositories.Interface;
 using HousingFund.DAL.Utilities;
-using HousingFund.DAL.ViewModels.Portal.Fund;
 using HousingFund.DAL.ViewModels.Portal.UserFund;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HousingFund.DAL.Repositories.Implementation
 {
